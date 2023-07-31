@@ -1,6 +1,5 @@
 from datetime import datetime
 class Task:
-    #add day time
     def __init__(self,name:str="undefined",task_name:str="undefined",category:str="undefined",creation_date:datetime=datetime.today(),deadline:datetime=datetime.today()):
 
         self.name=name

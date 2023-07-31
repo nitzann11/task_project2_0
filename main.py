@@ -57,14 +57,14 @@ def main_menu():
                 update_action=str(input("choose update option 1-4: "))
                 if update_action in update_options:
                         update_username=str(input("username of the user: "))
-                        update_password=str(input("enter user password"))
+                        update_password=str(input("enter user password: "))
                         update_value=str(input("enter the new value: "))
                         update_user(parameter=update_action,username=update_username,password=update_password,value=update_value)
                 else:
                     print("invalid input..")
             elif action=="5":
                 del_username=str(input("enter the user's username for delete: "))
-                del_password=str(input("enter the password of the user for delete:"))
+                del_password=str(input("enter the password of the user for delete: "))
                 delete_user(username=del_username,password=del_password)
             elif action=="6":
                 exit()

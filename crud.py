@@ -10,14 +10,14 @@ def create_task(task=Task):
             if task not in data:
                 data.append(task)
                 save_data(data=data)
-                print("task created.")
+                print("Task created!")
         else:
-            print("creation error..")
+            print("Creation error..")
 
 
 def view_tasks(parameter:str="1",value:str=""):
-    titles="\nName\t\tTask name\t\tcategory\t\t\tCreation date\t\t\tDeadline\t\t\tTime left'"
-    data=load_data()
+    titles="\nName\t\tTask name\t\tCategory\t\t\tCreation date\t\t\tDeadline\t\t\tTime left'"
+    data=load_data(filename="tasks.pickle")
     for task in data:
         if parameter=="1":
             print(titles)
@@ -41,60 +41,61 @@ def update_task(parameter:str="",value:str="",name:str="",task_name:str="",date_
     user_data=load_data(filename="accounts.pickle")
     data=load_data()
     for task in data:
-        if task.creator_name==name and task.task_name==task_name:
+        if task.name==name and task.task_name==task_name:
             if parameter=="1":
-                task.creator_name=value
+                task.name=value
             elif parameter=="2":
                 task.task_name=value
             elif parameter=="3":
                 for i in user_data:
-                    if value in i.task_premissions:
+                    if value==i.task_premissions:
                         task.category=value
                     else:
-                        print("permission missing..")
+                        print("Permission missing..")
             elif parameter=="4":
                 task.deadline=date_value
             elif parameter=="5":
-                task.time_diffrence=task.creation_date-task.deadline
+                task.time_diffrence=task.deadline-task.creation_date
         
             save_data(data=data)        
-            print("task has been updated")
+            print("Task has been updated!")
         else:
-            print("update error..")
+            print("Update error..")
 def delete_task(name,task_name):
     data=load_data()
     for task in data:
-        if task.creator_name==name and task.task_name==task_name:
+        if task.name==name and task.task_name==task_name:
             data.remove(task)
             save_data(data=data) 
-            print("task deleted.")
+            print("Task has been deleted!")
         else:
-            print("task wasn't found.")
+            print("task wasn't found..")
                
-def add_premission(username,password,value,admin_pass):
-    admin_password="9999"
-    data=load_data()
-    try:
-        for user in data:
-            if user.username==username and user.password==password and admin_pass==admin_password:
-                if value not in user.task_premissions:
-                    data.task_premissions.append(value)
-                    save_data(data=data)
-                    print("premission has been granted")
-
-    except:
-        print("invalid info")
+def add_premission(username:str="",password:str="",value:str="",admin_password:str=""):
+    data=load_data("accounts.pickle")
+    for user in data:
+        if user.username==username and user.password==password and admin_password=="9999":
+            if value not in user.task_premissions:
+                user.task_premissions.append(value)
+                save_data(filename="accounts.pickle",data=data)
+                print("Premission has been granted!")
+            else:
+                print(" Task already exist..")
+    
 
     
-def del_premission(username,password,value,admin_pass):
-    admin_password="9999"
-    data=load_data()
+def del_premission(username,password,value,admin_password):
+    data=load_data("accounts.pickle")
     for user in data:
         try:
-            if user.username==username and user.password==password and admin_pass==admin_password:
+            if user.username==username and user.password==password and admin_password=="9999":
                 if value in user.task_premissions:
-                    data.user.task_premissions.remove(value)
-                    save_data(data=data)
-                    print("premission has been removed")
+                    user.task_premissions.remove(value)
+                    save_data(filename="accounts.pickle",data=data)
+                    print("Premission has been removed!")
+                else:
+                    print("Value not in premissions..")
+            else:
+                print("Wrong info..")
         except:
-            print("invalid info")
+            print("Invalid info..")

@@ -5,13 +5,13 @@ from task_manager import tasks_manager
 def login(username:str="",password:str=""):
         data=load_data(filename="accounts.pickle")
         for user in data:
-            try:
                 if user.username==username and user.password==password:
                     print(f"\nWelcome {user.name}!")
                     tasks_manager()
-                     
-            except:
-                print("login error, please try again.")
+                else:
+                    print("wrong cradentials..")
+                    
+           
            
             
 
@@ -37,18 +37,18 @@ def create_user(user:User):
 
 def view_user(parameter:str="1",value:str=""):
     data=load_data("accounts.pickle")
-    if parameter=="1":
-        for user in data:
+    for user in data:
+        if parameter=="1":
             print(user)
-    elif parameter=="2":
-        if value==user.name:
-            print(user)
-    elif parameter=="3":
-        if value==user.username:
-            print(user)
-    elif parameter=="4":
-        if value in user.task_premissions:
-            print(user)
+        elif parameter=="2":
+            if value==user.name:
+                print(user)
+        elif parameter=="3":
+            if value==user.username:
+                print(user)
+        elif parameter=="4":
+            if value in user.task_premissions:
+                print(user)
     
 
 def update_user(parameter:str="",value:str="",username:str="",password:str=""):

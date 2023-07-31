@@ -5,7 +5,7 @@ def save_data(filename:str="tasks.pickle",data:list=[]):
         with open(filename,"wb") as f:
             dump(data,f)
     except:
-        print("oops something went wrong")
+        print("Oops something went wrong")
 
 def load_data(filename:str="tasks.pickle"):
     try:
