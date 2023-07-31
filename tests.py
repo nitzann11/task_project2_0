@@ -8,10 +8,13 @@ from datetime import datetime
 
 
 def reset_pickle(filename:str="tasks.pickle",data:list=[]):
+    """This function was made for convinience it will reset the pickle file so the user wont be needing to do it each time. it is added to the start of every testing function."""
     with open(filename,"wb") as f:
         dump(data,f)
 
 def random_user_test(num:int=10):
+    """This function will generate  user objects and provide a general example of how  data is created using small generic batch of inputs you will expect to recieve from the user."""
+    reset_pickle("accounts.pickle")
     for i in range(num):
         create_user(User(
             name=choice(["luffy","zoro","sanji","nami","chopper"]),
@@ -22,6 +25,8 @@ def random_user_test(num:int=10):
 
 
 def random_task_test(num:int=10):
+    """This function will generate  task objects and provide a general example of how  data is created using small generic batch of inputs you will expect to recieve from the user for tasks."""
+    reset_pickle()
     for i in range(num):
         create_task(Task(name=choice(["luffy","zoro","sanji","nami","chopper"]),
                         task_name=choice(["grocery","bills","errends","clean car","meeting","buy clothes","read book"]),
@@ -30,6 +35,7 @@ def random_task_test(num:int=10):
     view_tasks()
 
 def specific_create_user():
+    """This function is an example of how C-create works using a premade info without reciving an exception"""
     reset_pickle("accounts.pickle")
     create_user(User(
         name="mr.test",username="cooltest123",password="testest",email="test@mail.com"))
@@ -39,6 +45,7 @@ def specific_create_user():
         print("this is not working!!!")
 
 def specific_create_task():
+    """This function is an example of how R-Read works using a premade info without reciving an exception"""
     reset_pickle()
     create_task(Task(name="mr.test",task_name="testing the functions",category="general",deadline=(datetime(year=2023,month=8,day=2))))
     try:
@@ -47,6 +54,7 @@ def specific_create_task():
         print("this is not working 2!!!")
 
 def specific_del():
+    """This function is an example of how D-Delete works using a premade info without reciving an exception function will recieve 2 objects display them,delete one and will display the end result as well"""
     reset_pickle()
     create_task(Task(name="mr.test",task_name="first test",category="general",deadline=(datetime(year=2023,month=8,day=3))))
     create_task(Task(name="mr.test",task_name="second test",category="general",deadline=(datetime(year=2023,month=8,day=3))))
@@ -55,6 +63,7 @@ def specific_del():
     view_tasks()
 
 def specific_update():
+    """This function is an example of how U-Update works using a premade info without reciving an exception (will only show one way of updating as it works about the same value will change according to the parameter provided by the client.)"""
     reset_pickle()
     specific_create_task()
     view_tasks("1")
@@ -65,6 +74,7 @@ def specific_update():
         print("update not working..")
 
 def test_menu():
+    """This function serves as a simplfied menu for testing it is ordered by the order tests should follow."""
     print("""
     test menu:
           1.make random useres

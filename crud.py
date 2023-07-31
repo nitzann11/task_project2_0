@@ -2,7 +2,9 @@ from files import save_data,load_data
 from task_class import Task
 from datetime import datetime
 
+
 def create_task(task=Task):
+    """This function load the pickle file, handles new Task class data and writes it anew into the pickle file again."""
     user_data=load_data(filename="accounts.pickle")
     data=load_data()
     for user in user_data:
@@ -16,6 +18,7 @@ def create_task(task=Task):
 
 
 def view_tasks(parameter:str="1",value:str=""):
+    """"This function lets us see data on existing tasks, it can even filter it in diffrent ways"""
     titles="\nName\t\tTask name\t\tCategory\t\t\tCreation date\t\t\tDeadline\t\t\tTime left'"
     data=load_data(filename="tasks.pickle")
     for task in data:
@@ -38,6 +41,7 @@ def view_tasks(parameter:str="1",value:str=""):
 
 
 def update_task(parameter:str="",value:str="",name:str="",task_name:str="",date_value:datetime=datetime):
+    """This function lets us update and manipulate information on existing tasks and saves it, it has several validations so data won't duplicate or mess up."""
     user_data=load_data(filename="accounts.pickle")
     data=load_data()
     for task in data:
@@ -48,7 +52,7 @@ def update_task(parameter:str="",value:str="",name:str="",task_name:str="",date_
                 task.task_name=value
             elif parameter=="3":
                 for i in user_data:
-                    if value==i.task_premissions:
+                    if value in i.task_premissions:
                         task.category=value
                     else:
                         print("Permission missing..")
@@ -62,16 +66,19 @@ def update_task(parameter:str="",value:str="",name:str="",task_name:str="",date_
         else:
             print("Update error..")
 def delete_task(name,task_name):
+    """This function lets us delete tasks simply by providing the name of the one responsible to it and the task name."""
     data=load_data()
     for task in data:
         if task.name==name and task.task_name==task_name:
             data.remove(task)
             save_data(data=data) 
             print("Task has been deleted!")
-        else:
-            print("task wasn't found..")
+    else:
+        print("Task not found..")
                
 def add_premission(username:str="",password:str="",value:str="",admin_password:str=""):
+    """This function lets us add more premissions to an individual User class's object, without the required premission user wont be able to create a customized category for tasks.
+    ADMIN PASSWORD IS "9999" !!!"""
     data=load_data("accounts.pickle")
     for user in data:
         if user.username==username and user.password==password and admin_password=="9999":
@@ -85,6 +92,7 @@ def add_premission(username:str="",password:str="",value:str="",admin_password:s
 
     
 def del_premission(username,password,value,admin_password):
+    """This function is the oposite end of add_premission, it lets us remove a premission from an object from customized ones to the basic ones that comes in initialzion of the object."""
     data=load_data("accounts.pickle")
     for user in data:
         try:

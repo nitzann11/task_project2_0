@@ -1,6 +1,7 @@
 from login_functions import create_user,delete_user,login,update_user,view_user
 from user_class import User
 def main_menu():
+    """This function serves as the main menu and the starting page of the app. client can log in from here and manipulate user data from here with CRUD functions like:create,view,update(premissions can be changed only after logging in) and delete."""
     while True:    
         print("""
             Login menu:

@@ -1,5 +1,6 @@
 from datetime import datetime
 class Task:
+    """Class of tasks. Client can provide name, task name,category and deadline. Creation date auto start once task has been created and it can even calculate the delta between the 2 dates (in other words will tell you how much time left!)"""
     def __init__(self,name:str="undefined",task_name:str="undefined",category:str="undefined",creation_date:datetime=datetime.today(),deadline:datetime=datetime.today()):
 
         self.name=name

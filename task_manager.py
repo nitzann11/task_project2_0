@@ -2,7 +2,9 @@ from crud import create_task,view_tasks,update_task,delete_task,add_premission,d
 from task_class import Task
 from datetime import datetime
 
+
 def tasks_manager():
+    """This function serves as the second menu which lets client manipulate data on tasks through CRUD such as: create,read,update and delete tasks. Client can also give premissions for users for new types of categories. Exiting this menu will lead the client back to the main menu."""
     while True:
         print("""
         Tasks manager:
