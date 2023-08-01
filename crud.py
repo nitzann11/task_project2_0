@@ -8,33 +8,39 @@ def create_task(task=Task):
     user_data=load_data(filename="accounts.pickle")
     data=load_data()
     for user in user_data:
-        if task.name==user.name and task.category in user.task_premissions:
-            if task not in data:
-                data.append(task)
-                save_data(data=data)
-                print("Task created!")
-        else:
+        try:
+            if task.name==user.name and task.category in user.task_premissions:
+                if task not in data:
+                    data.append(task)
+                    save_data(data=data)
+                    print("Task created!")
+        except:
             print("Creation error..")
 
 
 def view_tasks(parameter:str="1",value:str=""):
     """"This function lets us see data on existing tasks, it can even filter it in diffrent ways"""
-    titles="\nName\t\tTask name\t\tCategory\t\t\tCreation date\t\t\tDeadline\t\t\tTime left'"
+    titles=f"\nName\t\tTask name\t\tCategory\t\t\tCreation date\t\t\tDeadline\t\t\tTime left'"
     data=load_data(filename="tasks.pickle")
+    sperator='------------------------------------------------------------------------------------------------------------------------------------'
     for task in data:
         if parameter=="1":
+            print(sperator)
             print(titles)
             print(task)
         elif parameter=="2":
             if task.name==value:
+                print(sperator)
                 print(titles)
                 print(task)
         elif parameter=="3":
             if task.task_name==value:
+                print(sperator)
                 print(titles)
                 print(task)
         elif parameter=="4":
             if task.category==value:
+                print(sperator)
                 print(titles)
                 print(task)
 

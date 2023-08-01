@@ -7,5 +7,5 @@ class User:
         self.email=email
         self.task_premissions=task_premissions    
     def __str__(self) -> str:
-        return f'"name\t\tusername\t\temail\t\tpremissions"\n\n{self.name}\t\t{self.username}\t\t{self.email}\t\t{self.task_premissions}'
+        return f'\n{self.name}\t\t{self.username}\t\t{self.email}\t\t{self.task_premissions}'
 

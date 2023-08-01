@@ -41,17 +41,27 @@ def create_user(user:User):
 def view_user(parameter:str="1",value:str=""):
     """This function lets us view existing users and their info (without password of course :P ) it can nerrow down users using diffrent filters"""
     data=load_data("accounts.pickle")
+    titles=f'\nname\t\tusername\t\temail\t\tpremissions'
+    seperator='-----------------------------------------------------------------------------------------------------------------------------------'
     for user in data:
         if parameter=="1":
+            print(seperator)
+            print(titles)
             print(user)
         elif parameter=="2":
             if value==user.name:
+                print(seperator)
+                print(titles)
                 print(user)
         elif parameter=="3":
             if value==user.username:
+                print(seperator)
+                print(titles)
                 print(user)
         elif parameter=="4":
             if value in user.task_premissions:
+                print(seperator)
+                print(titles)
                 print(user)
     
 
